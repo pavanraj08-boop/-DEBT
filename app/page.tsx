@@ -15,8 +15,8 @@ import { motion } from 'framer-motion';
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://ekzxephakvminafxzdcq.supabase.co"; 
 const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_r8W6GNtrqFi6wl5Z8rfvAQ_4MNZ8icc";
 const X_LINK = "https://x.com/i/communities/2012249877766439018"; 
-const BUY_LINK = "https://bags.fm/token/your_contract_address"; 
-const CONTRACT_ADDRESS = "88888888888888888888888888888888"; 
+const BUY_LINK = "https://bags.fm/22w4TrBSLXNbRUJNR4Z6njh6CrzNpk9s5b3dan5XBAGS"; 
+const CONTRACT_ADDRESS = "22w4TrBSLXNbRUJNR4Z6njh6CrzNpk9s5b3dan5XBAGS"; 
 // ==========================================
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
