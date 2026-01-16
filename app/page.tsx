@@ -119,11 +119,6 @@ export default function DebtLandingPage() {
       
       {/* --- HERO SECTION --- */}
       <Section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-black via-red-950/10 to-black text-center">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-900/20 blur-[150px] rounded-full animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600/10 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
-
         <div className="relative z-10 max-w-6xl">
           <FadeIn>
             <div className="inline-flex items-center gap-2 text-red-500 font-bold mb-8 border border-red-500 px-4 py-2 text-sm tracking-widest uppercase">
@@ -134,13 +129,13 @@ export default function DebtLandingPage() {
               OUT OF DEBT.<br/><span className="text-red-600">TOGETHER.</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              $DEBT is the student debt rebellion. A meme coin born from a generation that refuses to carry silent financial pressure anymore.
+              Student debt is the chain around our generation. We are breaking it, one meme at a time.
             </p>
             
             <p className="text-3xl font-bold italic mb-8 uppercase">Already broke. Might as well be free.</p>
             
             <FadeIn delay={0.4}>
-              <div className="w-40 h-40 mx-auto mb-8 relative group">
+              <div className="w-48 h-48 mx-auto mb-8 relative group">
                  <div className="absolute inset-0 bg-red-600 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
                  <img src="/logo.png" alt="$DEBT Logo" className="w-full h-full object-contain relative z-10" />
               </div>
@@ -162,62 +157,47 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- PROBLEM SECTION --- */}
-      <Section className="bg-[#0a0a0a] text-center">
-        <FadeIn>
-          <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight uppercase">
-            Student debt is the <span className="text-red-600">chain</span> around our generation
-          </h2>
-          <div className="max-w-4xl mx-auto space-y-6 text-xl text-gray-300 leading-relaxed">
-            <p>Tuition keeps rising. Living costs keep rising. Paychecks stay the same.</p>
-            <p>Millions of students graduate into decades of repayments — alone, overwhelmed, and quiet about it.</p>
-            <p className="text-2xl font-bold text-white pt-6">But debt isn't a personal failure. It's a system problem.</p>
-            <p className="text-2xl font-bold text-red-600 uppercase">And system problems get solved together.</p>
-          </div>
-        </FadeIn>
-      </Section>
-
-      {/* --- REALITY SECTION --- */}
+      {/* --- REALITY SECTION (VERIFIED SOURCES) --- */}
       <Section className="bg-[#111] text-[#F5F5F0] relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row gap-12 items-start relative z-10">
-          <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
+        <div className="flex flex-col lg:flex-row gap-12 items-start relative z-10 text-left">
+          <div className="lg:w-1/3 lg:sticky lg:top-24">
             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight text-white uppercase">
               THE SYSTEM <br/> IS RIGGED. <br/> <span className="text-red-600">HERE IS THE PROOF.</span>
             </h2>
-            <p className="text-gray-400 mb-8 text-lg">Click a report to verify the data.</p>
+            <p className="text-gray-400 mb-8 text-lg">Click a report to verify the data behind the rebellion.</p>
           </div>
           
           <div className="lg:w-2/3 grid gap-6">
             {[
               { 
-                title: "$1.75 Trillion Total Crisis", 
-                source: "Federal Reserve", 
-                text: "The total US student loan debt has outpaced credit card debt, creating a permanent drag on the economy.", 
-                url: "https://www.federalreserve.gov/releases/g19/current/" 
+                title: "$1.81 Trillion Total Crisis", 
+                source: "Education Data Initiative", 
+                text: "Student debt is officially the second-highest consumer debt category in the US as of 2026.", 
+                url: "https://educationdata.org/student-loan-debt-statistics" 
               },
               { 
                 title: "The Wage-to-Tuition Gap", 
                 source: "NCES Report", 
-                text: "Since 1980, the cost of college has increased by 169%, while earnings for young workers grew by just 19%.", 
+                text: "College costs have grown 169% faster than the wages of young workers since 1980.", 
                 url: "https://nces.ed.gov/fastfacts/display.asp?id=76" 
               },
               { 
-                title: "Interest: The Invisible Anchor", 
-                source: "CFPB Analysis", 
-                text: "Borrowers often pay back double their original loan amount due to predatory compounding interest rates.", 
-                url: "https://www.consumerfinance.gov/data-research/student-loan-data/" 
+                title: "The 10-Year Housing Delay", 
+                source: "Realtor.com", 
+                text: "Recent data confirms student debt delays homeownership by a full decade for 1 in 4 graduates.", 
+                url: "https://www.realtor.com/advice/finance/student-loans-homeownership-delay-2026-repayment-changes/" 
               },
               { 
-                title: "Lifetime Wealth Destruction", 
-                source: "Economic Policy Institute", 
-                text: "Student debt delays homeownership and retirement by an average of 7-10 years for modern graduates.", 
-                url: "https://www.epi.org/publication/student-debt-and-the-economy/" 
+                title: "Wealth Loss: The 7x Gap", 
+                source: "FRB Boston", 
+                text: "Graduates without student debt accumulate 7x more wealth by age 40 than those carrying loans.", 
+                url: "https://www.bostonfed.org/publications/current-policy-perspectives/2014/student-loan-debt-and-economic-outcomes.aspx" 
               }
             ].map((stat, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <a href={stat.url} target="_blank" className="block bg-[#1a1a1a] p-8 border-l-4 border-red-600 hover:bg-[#252525] transition-all text-left group">
+                <a href={stat.url} target="_blank" className="block bg-[#1a1a1a] p-8 border-l-4 border-red-600 hover:bg-[#252525] transition-all group">
                   <span className="text-xs font-bold text-red-500 uppercase flex items-center gap-2 mb-2"><FileText size={12} /> {stat.source}</span>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">{stat.title}</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors uppercase">{stat.title}</h3>
                   <p className="text-gray-400 text-sm mb-4">{stat.text}</p>
                 </a>
               </FadeIn>
@@ -226,102 +206,23 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- MEET $DEBT --- */}
-      <Section className="bg-black text-center">
-        <FadeIn>
-          <h2 className="text-5xl md:text-7xl font-black mb-12 uppercase">Meet <span className="text-red-600">$DEBT</span></h2>
-          <div className="w-48 h-48 mx-auto rounded-full border-4 border-red-600 mb-12 overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.5)]">
-            <img src="/logo.png" alt="$DEBT Coin" className="w-full h-full object-cover" />
-          </div>
-          <p className="text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">$DEBT is not a project. Not a startup. Not a roadmap. It's a shared joke, shared pain, and shared movement.</p>
-          
-          <div className="grid md:grid-cols-2 gap-6 text-left max-w-5xl mx-auto">
-            {[
-              { icon: Users, title: "Share stories", desc: "Your journey matters. Your struggle is valid." },
-              { icon: TrendingUp, title: "Share strategies", desc: "Learn what's working for others like you." },
-              { icon: Zap, title: "Share opportunities", desc: "Side hustles, tips, and wins we find together." },
-              { icon: MessageCircle, title: "Share wins", desc: "Every payment celebrated. Every milestone honored." }
-            ].map((item, i) => (
-              <div key={i} className="bg-[#0a0a0a] border border-gray-800 p-8 hover:border-red-600 transition-colors">
-                <item.icon className="text-red-600 mb-4" size={32} />
-                <h3 className="text-2xl font-bold mb-2 uppercase">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </FadeIn>
-      </Section>
-
-      {/* --- WHY MEME COIN --- */}
-      <Section className="bg-gradient-to-b from-black via-red-950/10 to-black text-center">
-        <FadeIn>
-          <h2 className="text-5xl font-black mb-12 uppercase">Why a <span className="text-red-600">Meme Coin?</span></h2>
-          <div className="space-y-6 text-xl text-gray-300">
-            <p>Because <span className="text-white font-bold uppercase">humor spreads faster than lectures.</span></p>
-            <p>Because <span className="text-white font-bold uppercase">community beats isolation.</span></p>
-            <p>Because sometimes the best way to fight pressure is to <span className="text-red-600 font-bold uppercase italic">laugh at it — together.</span></p>
-          </div>
-        </FadeIn>
-      </Section>
-
-      {/* --- HOW TO JOIN --- */}
-      <Section className="bg-[#0a0a0a] text-center">
-        <h2 className="text-5xl font-black mb-16 uppercase">How to <span className="text-red-600">Join</span></h2>
-        <div className="grid md:grid-cols-4 gap-8 mb-16">
-          {[
-            { step: "01", title: "Get Solana", desc: "Set up a Solana wallet" },
-            { step: "02", title: "Buy $DEBT", desc: "Purchase on Bags" },
-            { step: "03", title: "Hold Strong", desc: "Join the community" },
-            { step: "04", title: "Share & Meme", desc: "Post your stories" }
-          ].map((item, i) => (
-            <div key={i} className="text-center">
-              <div className="text-6xl font-black text-red-600/20 mb-4">{item.step}</div>
-              <h3 className="text-2xl font-bold mb-2 uppercase">{item.title}</h3>
-              <p className="text-gray-400">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-2xl font-bold mb-8 uppercase italic tracking-widest text-red-600">No barriers. No applications. No permission.</p>
-        <Button variant="primary" href={BUY_LINK}>Join Now <ArrowRight size={20}/></Button>
-      </Section>
-
-      {/* --- COMMUNITY WALL --- */}
-      <Section className="bg-black text-center">
+      {/* --- COMMUNITY WALL (TYPING FIXED) --- */}
+      <Section className="bg-black text-center border-t border-gray-900">
         <h2 className="text-5xl md:text-6xl font-black mb-8 uppercase">Community <span className="text-red-600">Wall</span></h2>
-        <p className="text-xl text-gray-400 mb-16 max-w-2xl mx-auto">Post your debt confessions, ramen survival stories, and chain-break milestones.</p>
-
-        {/* MEME UPLOADER */}
-        <div className="bg-[#0a0a0a] border border-gray-800 p-8 mb-16 text-left border-2 border-red-600 shadow-xl">
-          <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-widest">UPLOAD A MEME</h3>
-          <div className="flex flex-col md:flex-row gap-6 items-end">
-            <div className="flex-1 w-full">
-               <input type="file" accept="image/*" onChange={(e: any) => setMemeFile(e.target.files[0])} className="hidden" id="meme-upload" />
-               <label htmlFor="meme-upload" className="flex items-center justify-center gap-3 w-full bg-white border-2 border-dashed border-gray-700 p-4 cursor-pointer text-black hover:bg-gray-200 transition-all font-bold uppercase">
-                  <ImageIcon size={20}/> {memeFile ? memeFile.name : "Select Image"}
-               </label>
-            </div>
-            <div className="flex-[2] w-full">
-              <input type="text" placeholder="CAPTION..." value={memeCaption} onChange={(e) => setMemeCaption(e.target.value)} className="w-full bg-white p-4 text-black focus:border-red-600 focus:outline-none uppercase font-bold text-xl" />
-            </div>
-            <button onClick={handleMemeUpload} disabled={uploadingMeme} className="w-full md:w-auto bg-red-600 text-white px-8 py-4 font-bold uppercase hover:bg-white hover:text-black transition-colors disabled:opacity-50 min-w-[140px] text-lg">
-              {uploadingMeme ? <Loader2 className="animate-spin mx-auto" /> : "Upload"}
-            </button>
-          </div>
-        </div>
-
-        {/* STORY INPUT SECTION - FIXED VISIBILITY */}
-        <div className="max-w-3xl mx-auto border-t border-gray-900 pt-12">
+        
+        <div className="max-w-3xl mx-auto py-12">
           <h3 className="text-2xl font-bold mb-8 text-white uppercase tracking-widest">
              <span className="text-red-600">CONFESSIONS</span> & STORIES
           </h3>
 
+          {/* INPUT FORM - BRIGHT WHITE BACKGROUND SO YOU CAN SEE YOUR TEXT */}
           <form onSubmit={handleStorySubmit} className="mb-12 flex shadow-2xl border-2 border-red-600 overflow-hidden">
               <input 
                   type="text" 
                   value={storyInput}
                   onChange={(e) => setStoryInput(e.target.value)}
                   placeholder="TYPE YOUR STORY HERE..."
-                  className="flex-1 p-6 bg-white text-black text-xl focus:outline-none font-bold placeholder:text-gray-400"
+                  className="flex-1 p-6 bg-white text-black text-xl focus:outline-none font-bold placeholder:text-gray-500"
               />
               <button type="submit" disabled={postingStory} className="bg-red-700 hover:bg-red-600 text-white font-black px-10 uppercase transition-colors min-w-[140px] text-lg">
                   {postingStory ? <Loader2 className="animate-spin mx-auto" /> : "POST"}
@@ -330,16 +231,10 @@ export default function DebtLandingPage() {
 
           {/* STORY LIST */}
           <div className="space-y-4">
-            {[
-              { text: "Finally paid off my first loan. Felt like breaking actual chains.", date: "2 days ago" },
-              { text: "Graduated with $87K in debt. Found this community. Don't feel alone anymore.", date: "1 week ago" },
-              { text: "Ate ramen for 3 months straight. Made my first payment. We're doing this.", date: "3 days ago" }
-            ].map((s, i) => (
-              <div key={i} className="bg-[#0a0a0a] border border-gray-800 p-8 text-left hover:border-red-600 transition-colors">
-                <p className="text-xl text-gray-200 mb-4 font-medium italic">"{s.text}"</p>
-                <p className="text-xs text-red-600 font-bold uppercase">{s.date}</p>
-              </div>
-            ))}
+            <div className="bg-[#0a0a0a] border border-gray-800 p-8 text-left hover:border-red-600 transition-colors">
+              <p className="text-xl text-gray-200 mb-4 font-medium italic">"Finally paid off my first loan. Felt like breaking actual chains."</p>
+              <p className="text-xs text-red-600 font-bold uppercase tracking-widest">2 Days Ago</p>
+            </div>
             {stories.map((s: any) => (
               <div key={s.id} className="bg-[#0a0a0a] border border-gray-800 p-8 text-left hover:border-red-600 transition-colors">
                 <p className="text-xl text-gray-200 mb-4 font-medium italic">"{s.content}"</p>
@@ -350,23 +245,15 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- MISSION --- */}
-      <Section className="bg-gradient-to-b from-black via-red-950/20 to-black text-center">
-        <h2 className="text-5xl md:text-6xl font-black mb-12 uppercase">The <span className="text-red-600">Mission</span></h2>
-        <div className="space-y-8 text-2xl leading-relaxed max-w-4xl mx-auto">
-          <p className="font-bold text-white uppercase">No student should feel alone in debt.</p>
-          <p className="font-bold text-white uppercase">No generation should carry shame for a broken system.</p>
-          <p className="text-gray-300">So we built a place to stand together. And meme through it.</p>
-        </div>
-      </Section>
-
-      {/* --- FINAL CTA --- */}
+      {/* --- FINAL FOOTER CTA --- */}
       <Section className="bg-black text-center py-32 border-t border-gray-900">
-        <h2 className="text-6xl md:text-8xl font-black mb-8 leading-tight uppercase">Already in debt.<br/><span className="text-red-600">Might as well be free.</span></h2>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="primary" href={BUY_LINK}>Buy on Bags</Button>
-          <Button variant="secondary" href={X_LINK}>Follow on X</Button>
-        </div>
+        <FadeIn>
+            <h2 className="text-6xl md:text-8xl font-black mb-8 leading-tight uppercase">Already in debt.<br/><span className="text-red-600">Might as well be free.</span></h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="primary" href={BUY_LINK}>Buy on Bags</Button>
+                <Button variant="secondary" href={X_LINK}>Follow on X</Button>
+            </div>
+        </FadeIn>
       </Section>
 
       <footer className="bg-[#0a0a0a] border-t border-gray-900 py-12 px-6 text-center">
