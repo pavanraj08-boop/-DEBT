@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import { 
   ShieldCheck, ArrowRight, Shield, Copy, Check, 
   Image as ImageIcon, Loader2, Users, TrendingUp, Zap, 
-  MessageCircle, FileText
+  MessageCircle, FileText, Wallet, ShoppingCart, HeartHandshake, Share2, Plus
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -21,7 +21,6 @@ const CONTRACT_ADDRESS = "88888888888888888888888888888888";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// --- HELPER COMPONENTS ---
 const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -34,16 +33,16 @@ const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
 );
 
 const Section = ({ children, className = '' }: { children: React.ReactNode, className?: string }) => (
-  <section className={`py-20 px-6 ${className}`}>
+  <section className={`py-24 px-6 ${className}`}>
     <div className="max-w-7xl mx-auto">{children}</div>
   </section>
 );
 
 const Button = ({ children, variant = 'primary', href, className = '' }: any) => {
-  const baseStyles = "px-8 py-4 font-bold text-lg transition-all duration-300 inline-flex items-center gap-3 cursor-pointer text-center justify-center";
+  const baseStyles = "px-10 py-5 font-black text-xl transition-all duration-300 inline-flex items-center gap-3 cursor-pointer text-center justify-center uppercase tracking-tighter italic";
   const variants = {
     primary: "bg-red-600 hover:bg-red-700 text-white hover:scale-105 hover:shadow-2xl hover:shadow-red-600/50",
-    secondary: "bg-transparent border-2 border-white text-white hover:bg-white hover:text-black"
+    secondary: "bg-transparent border-4 border-white text-white hover:bg-white hover:text-black"
   };
   return (
     <a href={href || "#"} target="_blank" rel="noopener noreferrer" className={`${baseStyles} ${variants[variant as keyof typeof variants]} ${className}`}>
@@ -57,24 +56,14 @@ export default function DebtLandingPage() {
   const [stories, setStories] = useState<any[]>([]);
   const [storyInput, setStoryInput] = useState('');
   const [postingStory, setPostingStory] = useState(false);
-  const [memes, setMemes] = useState<any[]>([]);
-  const [memeFile, setMemeFile] = useState<File | null>(null);
-  const [memeCaption, setMemeCaption] = useState("");
-  const [uploadingMeme, setUploadingMeme] = useState(false);
 
   useEffect(() => {
     fetchStories();
-    fetchMemes();
   }, []);
 
   const fetchStories = async () => {
     const { data } = await supabase.from('stories').select('*').order('created_at', { ascending: false });
     if (data) setStories(data);
-  };
-
-  const fetchMemes = async () => {
-    const { data } = await supabase.from('memes').select('*').order('created_at', { ascending: false });
-    if (data) setMemes(data);
   };
 
   const copyToClipboard = () => {
@@ -92,285 +81,177 @@ export default function DebtLandingPage() {
     setPostingStory(false);
   };
 
-  const handleMemeUpload = async () => {
-    if (!memeFile) return alert("Select an image first!");
-    setUploadingMeme(true);
-    try {
-      const fileName = `${Date.now()}_${memeFile.name.replace(/\s/g, '_')}`;
-      const { error: uploadError } = await supabase.storage.from('memes').upload(fileName, memeFile);
-      if (uploadError) throw uploadError;
-      const { data: urlData } = supabase.storage.from('memes').getPublicUrl(fileName);
-      const { error: dbError } = await supabase.from('memes').insert([{ image_url: urlData.publicUrl, caption: memeCaption || "DEBT REBELLION" }]);
-      if (dbError) throw dbError;
-      setMemeFile(null); setMemeCaption(""); fetchMemes();
-      alert("Meme Uploaded!");
-    } catch (error) {
-      console.error(error);
-      alert("Upload failed.");
-    } finally { setUploadingMeme(false); }
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", { month: 'short', day: 'numeric' });
-  };
-
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white selection:bg-red-600 selection:text-white font-sans overflow-x-hidden uppercase">
       
       {/* --- HERO SECTION --- */}
-      <Section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-black via-red-950/10 to-black text-center">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-900/20 blur-[150px] rounded-full animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600/10 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
-
-        <div className="relative z-10 max-w-6xl">
+      <Section className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-black via-red-950/20 to-black text-center">
+        <div className="relative z-10 max-w-5xl">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 text-red-500 font-bold mb-8 border border-red-500 px-4 py-2 text-sm tracking-widest uppercase">
-              <Shield size={16} /> The Student Debt Rebellion
-            </div>
-
-            <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none tracking-tighter uppercase">
-              OUT OF DEBT.<br/><span className="text-red-600">TOGETHER.</span>
+            <h1 className="text-6xl md:text-9xl font-black mb-8 leading-none tracking-tighter italic">
+              STUDENT DEBT IS THE <span className="text-red-600 underline">CHAIN</span> AROUND OUR GENERATION
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              $DEBT is the student debt rebellion. A meme coin born from a generation that refuses to carry silent financial pressure anymore.
-            </p>
-            
-            <p className="text-3xl font-bold italic mb-8 uppercase">Already broke. Might as well be free.</p>
-            
-            <FadeIn delay={0.4}>
-              <div className="w-40 h-40 mx-auto mb-8 relative group">
-                 <div className="absolute inset-0 bg-red-600 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                 <img src="/logo.png" alt="$DEBT Logo" className="w-full h-full object-contain relative z-10" />
-              </div>
-            </FadeIn>
-
-            <div className="mb-8 inline-flex items-center gap-3 bg-[#0a0a0a] border border-gray-800 px-6 py-3 hover:border-red-600 transition-colors cursor-pointer" onClick={copyToClipboard}>
-              <span className="text-xs text-gray-500 uppercase tracking-widest">CA:</span>
-              <code className="text-sm text-red-500 font-mono">{CONTRACT_ADDRESS.slice(0,6)}...{CONTRACT_ADDRESS.slice(-6)}</code>
-              <button className="p-2">
-                {copied ? <Check size={16} className="text-green-500" /> : <Copy size={16} className="text-gray-500" />}
-              </button>
+            <div className="space-y-6 text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto font-bold tracking-tight">
+                <p>Tuition keeps rising. Living costs keep rising. Paychecks stay the same.</p>
+                <p>Millions graduate into decades of repayments — alone, overwhelmed, and quiet about it.</p>
+                <p className="text-white text-3xl font-black italic">But debt isn't a personal failure. It's a system problem. And system problems get solved together.</p>
             </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="primary" href={BUY_LINK}>Buy on Bags <ArrowRight size={20} /></Button>
-              <Button variant="secondary" href={X_LINK}>Follow on X</Button>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <h2 className="text-4xl font-black italic">MEET <span className="text-red-600">$DEBT</span></h2>
+                <ArrowRight className="hidden sm:block text-red-600" size={48} />
+                <div className="flex gap-4">
+                  <Button variant="primary" href={BUY_LINK}>JOIN THE REBELLION</Button>
+                </div>
             </div>
           </FadeIn>
         </div>
       </Section>
 
-      {/* --- PROBLEM SECTION --- */}
-      <Section className="bg-[#0a0a0a] text-center">
+      {/* --- MEET $DEBT SECTION --- */}
+      <Section className="bg-[#0a0a0a] border-y-4 border-red-600/20 text-center">
         <FadeIn>
-          <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight uppercase">
-            Student debt is the <span className="text-red-600">chain</span> around our generation
-          </h2>
-          <div className="max-w-4xl mx-auto space-y-6 text-xl text-gray-300 leading-relaxed">
-            <p>Tuition keeps rising. Living costs keep rising. Paychecks stay the same.</p>
-            <p>Millions of students graduate into decades of repayments — alone, overwhelmed, and quiet about it.</p>
-            <p className="text-2xl font-bold text-white pt-6">But debt isn't a personal failure. It's a system problem.</p>
-            <p className="text-2xl font-bold text-red-600 uppercase">And system problems get solved together.</p>
-          </div>
+            <div className="w-64 h-64 mx-auto mb-12 relative">
+                <div className="absolute inset-0 bg-red-600 blur-[80px] opacity-30 animate-pulse"></div>
+                <img src="/logo.png" alt="$DEBT Logo" className="w-full h-full object-contain relative z-10" />
+            </div>
+
+            <div className="max-w-4xl mx-auto mb-20">
+                <h3 className="text-3xl md:text-5xl font-black mb-8 italic">
+                    $DEBT IS NOT A PROJECT. NOT A STARTUP. NOT A ROADMAP.
+                </h3>
+                <p className="text-2xl md:text-4xl font-bold text-red-600 italic underline decoration-white">
+                    IT'S A SHARED JOKE, SHARED PAIN, AND SHARED MOVEMENT.
+                </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                {[
+                    { icon: MessageCircle, title: "Share stories", desc: "Your journey matters. Your struggle is valid." },
+                    { icon: TrendingUp, title: "Share strategies", desc: "Learn what's working for others like you." },
+                    { icon: Zap, title: "Share opportunities", desc: "Side hustles, tips, and wins we find together." },
+                    { icon: HeartHandshake, title: "Share wins", desc: "Every payment celebrated. Every milestone honored." }
+                ].map((item, i) => (
+                    <div key={i} className="bg-black border-2 border-gray-800 p-8 hover:border-red-600 transition-all group">
+                        <item.icon className="text-red-600 mb-6 group-hover:scale-110 transition-transform" size={40} />
+                        <h4 className="text-2xl font-black mb-3 italic">{item.title}</h4>
+                        <p className="text-gray-500 font-bold leading-tight">{item.desc}</p>
+                    </div>
+                ))}
+            </div>
+            <p className="mt-16 text-2xl font-black text-white italic tracking-widest">AND MEME THE SYSTEM WHILE DOING IT.</p>
         </FadeIn>
       </Section>
 
-      {/* --- REALITY SECTION --- */}
-      <Section className="bg-[#111] text-[#F5F5F0] relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row gap-12 items-start relative z-10">
-          <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
-            <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight text-white uppercase">
-              THE SYSTEM <br/> IS RIGGED. <br/> <span className="text-red-600">HERE IS THE PROOF.</span>
-            </h2>
-            <p className="text-gray-400 mb-8 text-lg">Click a report to verify the data.</p>
-          </div>
-          
-          <div className="lg:w-2/3 grid gap-6">
-            {[
-              { 
-                title: "$1.75 Trillion Total Crisis", 
-                source: "Federal Reserve", 
-                text: "The total US student loan debt has outpaced credit card debt, creating a permanent drag on the economy.", 
-                url: "https://www.federalreserve.gov/releases/g19/current/" 
-              },
-              { 
-                title: "The Wage-to-Tuition Gap", 
-                source: "NCES Report", 
-                text: "Since 1980, the cost of college has increased by 169%, while earnings for young workers grew by just 19%.", 
-                url: "https://nces.ed.gov/fastfacts/display.asp?id=76" 
-              },
-              { 
-                title: "Interest: The Invisible Anchor", 
-                source: "CFPB Analysis", 
-                text: "Borrowers often pay back double their original loan amount due to predatory compounding interest rates.", 
-                url: "https://www.consumerfinance.gov/data-research/student-loan-data/" 
-              },
-              { 
-                title: "Lifetime Wealth Destruction", 
-                source: "Economic Policy Institute", 
-                text: "Student debt delays homeownership and retirement by an average of 7-10 years for modern graduates.", 
-                url: "https://www.epi.org/publication/student-debt-and-the-economy/" 
-              }
-            ].map((stat, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <a href={stat.url} target="_blank" className="block bg-[#1a1a1a] p-8 border-l-4 border-red-600 hover:bg-[#252525] transition-all text-left group">
-                  <span className="text-xs font-bold text-red-500 uppercase flex items-center gap-2 mb-2"><FileText size={12} /> {stat.source}</span>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">{stat.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{stat.text}</p>
-                </a>
-              </FadeIn>
-            ))}
-          </div>
+      {/* --- WHY MEME COIN SECTION --- */}
+      <Section className="bg-black text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none flex flex-wrap text-9xl font-black overflow-hidden leading-none">
+            {Array(20).fill("$DEBT REBELLION ")}
         </div>
-      </Section>
-
-      {/* --- MEET $DEBT --- */}
-      <Section className="bg-black text-center">
         <FadeIn>
-          <h2 className="text-5xl md:text-7xl font-black mb-12 uppercase">Meet <span className="text-red-600">$DEBT</span></h2>
-          <div className="w-48 h-48 mx-auto rounded-full border-4 border-red-600 mb-12 overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.5)]">
-            <img src="/logo.png" alt="$DEBT Coin" className="w-full h-full object-cover" />
-          </div>
-          <p className="text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">$DEBT is not a project. Not a startup. Not a roadmap. It's a shared joke, shared pain, and shared movement.</p>
-          
-          <div className="grid md:grid-cols-2 gap-6 text-left max-w-5xl mx-auto">
-            {[
-              { icon: Users, title: "Share stories", desc: "Your journey matters. Your struggle is valid." },
-              { icon: TrendingUp, title: "Share strategies", desc: "Learn what's working for others like you." },
-              { icon: Zap, title: "Share opportunities", desc: "Side hustles, tips, and wins we find together." },
-              { icon: MessageCircle, title: "Share wins", desc: "Every payment celebrated. Every milestone honored." }
-            ].map((item, i) => (
-              <div key={i} className="bg-[#0a0a0a] border border-gray-800 p-8 hover:border-red-600 transition-colors">
-                <item.icon className="text-red-600 mb-4" size={32} />
-                <h3 className="text-2xl font-bold mb-2 uppercase">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+            <h2 className="text-5xl md:text-8xl font-black mb-16 italic">WHY A <span className="text-red-600">MEMECOIN?</span></h2>
+            <div className="space-y-12 max-w-5xl mx-auto text-3xl md:text-5xl font-black italic tracking-tighter">
+                <p>BECAUSE <span className="text-red-600">HUMOR</span> SPREADS FASTER THAN LECTURES.</p>
+                <p>BECAUSE <span className="text-red-600">COMMUNITY</span> BEATS ISOLATION.</p>
+                <p>BECAUSE SOMETIMES THE BEST WAY TO FIGHT PRESSURE IS TO <span className="underline decoration-red-600 underline-offset-8">LAUGH AT IT — TOGETHER.</span></p>
+            </div>
+            <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="p-10 border-4 border-red-600 text-3xl font-black italic">$DEBT IS CULTURE</div>
+                <div className="p-10 border-4 border-white text-3xl font-black italic">$DEBT IS IDENTITY</div>
+                <div className="p-10 border-4 border-red-600 text-3xl font-black italic">$DEBT IS THE REBELLION</div>
+            </div>
         </FadeIn>
       </Section>
 
-      {/* --- WHY MEME COIN --- */}
-      <Section className="bg-gradient-to-b from-black via-red-950/10 to-black text-center">
-        <FadeIn>
-          <h2 className="text-5xl font-black mb-12 uppercase">Why a <span className="text-red-600">Meme Coin?</span></h2>
-          <div className="space-y-6 text-xl text-gray-300">
-            <p>Because <span className="text-white font-bold uppercase">humor spreads faster than lectures.</span></p>
-            <p>Because <span className="text-white font-bold uppercase">community beats isolation.</span></p>
-            <p>Because sometimes the best way to fight pressure is to <span className="text-red-600 font-bold uppercase italic">laugh at it — together.</span></p>
-          </div>
-        </FadeIn>
-      </Section>
-
-      {/* --- HOW TO JOIN --- */}
-      <Section className="bg-[#0a0a0a] text-center">
-        <h2 className="text-5xl font-black mb-16 uppercase">How to <span className="text-red-600">Join</span></h2>
-        <div className="grid md:grid-cols-4 gap-8 mb-16">
+      {/* --- HOW TO JOIN SECTION --- */}
+      <Section className="bg-[#0a0a0a] border-y-4 border-gray-900">
+        <div className="text-center mb-20">
+            <h2 className="text-6xl font-black italic uppercase tracking-tighter">HOW TO <span className="text-red-600">JOIN</span></h2>
+        </div>
+        <div className="grid md:grid-cols-4 gap-12 mb-20">
           {[
-            { step: "01", title: "Get Solana", desc: "Set up a Solana wallet" },
-            { step: "02", title: "Buy $DEBT", desc: "Purchase on Bags" },
-            { step: "03", title: "Hold Strong", desc: "Join the community" },
-            { step: "04", title: "Share & Meme", desc: "Post your stories" }
+            { step: "01", icon: Wallet, title: "Get Solana", desc: "Set up a Solana wallet" },
+            { step: "02", icon: ShoppingCart, title: "Buy $DEBT", desc: "Purchase on Bags" },
+            { step: "03", icon: Users, title: "Hold Strong", desc: "Join the community" },
+            { step: "04", icon: Share2, title: "Share & Meme", desc: "Post your stories" }
           ].map((item, i) => (
-            <div key={i} className="text-center">
-              <div className="text-6xl font-black text-red-600/20 mb-4">{item.step}</div>
-              <h3 className="text-2xl font-bold mb-2 uppercase">{item.title}</h3>
-              <p className="text-gray-400">{item.desc}</p>
+            <div key={i} className="text-center relative group">
+              <div className="text-9xl font-black text-white/5 absolute -top-12 left-1/2 -translate-x-1/2 z-0 group-hover:text-red-600/10 transition-colors">{item.step}</div>
+              <div className="relative z-10">
+                <item.icon className="mx-auto text-red-600 mb-6 group-hover:scale-110 transition-transform" size={48} />
+                <h3 className="text-3xl font-black mb-4 italic leading-none">{item.title}</h3>
+                <p className="text-gray-500 font-bold uppercase text-sm tracking-widest">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
-        <p className="text-2xl font-bold mb-8 uppercase italic tracking-widest text-red-600">No barriers. No applications. No permission.</p>
-        <Button variant="primary" href={BUY_LINK}>Join Now <ArrowRight size={20}/></Button>
+        <div className="text-center">
+            <p className="text-2xl font-black mb-12 italic text-gray-500">THAT'S IT. NO BARRIERS. NO APPLICATIONS. NO PERMISSION.</p>
+            <Button variant="primary" href={BUY_LINK}>JOIN THE FIGHT NOW</Button>
+        </div>
       </Section>
 
       {/* --- COMMUNITY WALL --- */}
       <Section className="bg-black text-center">
-        <h2 className="text-5xl md:text-6xl font-black mb-8 uppercase">Community <span className="text-red-600">Wall</span></h2>
-        <p className="text-xl text-gray-400 mb-16 max-w-2xl mx-auto">Post your debt confessions, ramen survival stories, and chain-break milestones.</p>
-
-        {/* MEME UPLOADER */}
-        <div className="bg-[#0a0a0a] border border-gray-800 p-8 mb-16 text-left border-2 border-red-600 shadow-xl">
-          <h3 className="text-xl font-bold mb-4 text-white uppercase tracking-widest">UPLOAD A MEME</h3>
-          <div className="flex flex-col md:flex-row gap-6 items-end">
-            <div className="flex-1 w-full">
-               <input type="file" accept="image/*" onChange={(e: any) => setMemeFile(e.target.files[0])} className="hidden" id="meme-upload" />
-               <label htmlFor="meme-upload" className="flex items-center justify-center gap-3 w-full bg-white border-2 border-dashed border-gray-700 p-4 cursor-pointer text-black hover:bg-gray-200 transition-all font-bold uppercase">
-                  <ImageIcon size={20}/> {memeFile ? memeFile.name : "Select Image"}
-               </label>
-            </div>
-            <div className="flex-[2] w-full">
-              <input type="text" placeholder="CAPTION..." value={memeCaption} onChange={(e) => setMemeCaption(e.target.value)} className="w-full bg-white p-4 text-black focus:border-red-600 focus:outline-none uppercase font-bold text-xl" />
-            </div>
-            <button onClick={handleMemeUpload} disabled={uploadingMeme} className="w-full md:w-auto bg-red-600 text-white px-8 py-4 font-bold uppercase hover:bg-white hover:text-black transition-colors min-w-[140px] text-lg">
-              {uploadingMeme ? <Loader2 className="animate-spin mx-auto" /> : "Upload"}
-            </button>
-          </div>
-        </div>
-
-        {/* STORY INPUT FIXED */}
-        <div className="max-w-3xl mx-auto border-t border-gray-900 pt-12">
-          <h3 className="text-2xl font-bold mb-8 text-white uppercase tracking-widest">
-             <span className="text-red-600">CONFESSIONS</span> & STORIES
-          </h3>
-
-          <form onSubmit={handleStorySubmit} className="mb-12 flex shadow-2xl border-2 border-red-600 overflow-hidden">
+        <h2 className="text-6xl md:text-8xl font-black mb-8 italic leading-none text-red-600">COMMUNITY WALL</h2>
+        <p className="text-xl text-gray-400 font-bold uppercase tracking-widest mb-16">Post debt confessions, ramen survival stories, and wins.</p>
+        
+        <div className="max-w-4xl mx-auto mb-32">
+          {/* INPUT FORM - HIGH VISIBILITY WHITE BOX */}
+          <form onSubmit={handleStorySubmit} className="mb-16 flex shadow-[0_0_50px_rgba(220,38,38,0.3)] border-4 border-red-600 overflow-hidden">
               <input 
                   type="text" 
                   value={storyInput}
                   onChange={(e) => setStoryInput(e.target.value)}
-                  placeholder="TYPE YOUR STORY HERE..."
-                  className="flex-1 p-6 bg-white text-black text-xl focus:outline-none font-bold placeholder:text-gray-400"
+                  placeholder="TYPE YOUR DEBT STORY HERE..."
+                  className="flex-1 p-8 bg-white text-black text-2xl focus:outline-none font-black placeholder:text-gray-400 uppercase italic"
               />
-              <button type="submit" disabled={postingStory} className="bg-red-700 hover:bg-red-600 text-white font-black px-10 uppercase transition-colors min-w-[140px] text-lg">
+              <button type="submit" disabled={postingStory} className="bg-red-600 hover:bg-red-700 text-white font-black px-12 uppercase italic transition-colors text-2xl border-l-4 border-red-600">
                   {postingStory ? <Loader2 className="animate-spin mx-auto" /> : "POST"}
               </button>
           </form>
 
-          {/* STORY LIST */}
-          <div className="space-y-4">
-            {[
-              { text: "Finally paid off my first loan. Felt like breaking actual chains.", date: "2 days ago" },
-              { text: "Graduated with $87K in debt. Found this community. Don't feel alone anymore.", date: "1 week ago" },
-              { text: "Ate ramen for 3 months straight. Made my first payment. We're doing this.", date: "3 days ago" }
-            ].map((s, i) => (
-              <div key={i} className="bg-[#0a0a0a] border border-gray-800 p-8 text-left hover:border-red-600 transition-colors">
-                <p className="text-xl text-gray-200 mb-4 font-medium italic">"{s.text}"</p>
-                <p className="text-xs text-red-600 font-bold uppercase">{s.date}</p>
+          <div className="grid gap-6">
+            <div className="bg-[#0a0a0a] border-2 border-gray-800 p-10 text-left hover:border-red-600 transition-colors relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                 <Shield className="text-red-600" size={40} />
               </div>
-            ))}
-            {stories.map((s: any) => (
-              <div key={s.id} className="bg-[#0a0a0a] border border-gray-800 p-8 text-left hover:border-red-600 transition-colors">
-                <p className="text-xl text-gray-200 mb-4 font-medium italic">"{s.content}"</p>
-                <p className="text-xs text-gray-500 font-bold uppercase">{formatDate(s.created_at)}</p>
-              </div>
-            ))}
+              <p className="text-2xl font-black italic uppercase tracking-tight leading-tight mb-4">"Finally paid off my first loan. Felt like breaking actual chains."</p>
+              <p className="text-sm text-red-600 font-black tracking-[0.3em]">CHAIN BROKEN: 2 DAYS AGO</p>
+            </div>
           </div>
         </div>
-      </Section>
 
-      {/* --- MISSION --- */}
-      <Section className="bg-gradient-to-b from-black via-red-950/20 to-black text-center">
-        <h2 className="text-5xl md:text-6xl font-black mb-12 uppercase">The <span className="text-red-600">Mission</span></h2>
-        <div className="space-y-8 text-2xl leading-relaxed max-w-4xl mx-auto">
-          <p className="font-bold text-white uppercase">No student should feel alone in debt.</p>
-          <p className="font-bold text-white uppercase">No generation should carry shame for a broken system.</p>
-          <p className="text-gray-300">So we built a place to stand together. And meme through it.</p>
+        {/* --- MEME GALLERY --- */}
+        <div className="max-w-7xl mx-auto border-t-4 border-gray-900 pt-24">
+            <h3 className="text-5xl font-black mb-16 italic tracking-widest text-white uppercase">MEME <span className="text-red-600">GALLERY</span></h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="aspect-square bg-[#0a0a0a] border-4 border-gray-800 flex flex-col items-center justify-center p-8 group hover:border-red-600 transition-all cursor-pointer relative overflow-hidden">
+                        <ImageIcon className="text-gray-800 group-hover:text-red-600 mb-4 transition-colors" size={64} />
+                        <span className="text-gray-700 font-black uppercase text-sm text-center group-hover:text-white italic">MEME {i}<br/>YOUR REBELLION HERE</span>
+                        <div className="absolute top-4 right-4 bg-red-600 p-1">
+                            <Plus size={16} />
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
       </Section>
 
-      {/* --- FINAL CTA --- */}
-      <Section className="bg-black text-center py-32 border-t border-gray-900">
-        <h2 className="text-6xl md:text-8xl font-black mb-8 leading-tight uppercase">Already in debt.<br/><span className="text-red-600">Might as well be free.</span></h2>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="primary" href={BUY_LINK}>Buy on Bags</Button>
-          <Button variant="secondary" href={X_LINK}>Follow on X</Button>
-        </div>
-      </Section>
-
-      <footer className="bg-[#0a0a0a] border-t border-gray-900 py-12 px-6 text-center">
-        <p className="text-sm text-gray-600 italic tracking-widest uppercase">$DEBT is a meme coin. No promises. Just vibes.</p>
+      {/* --- FOOTER --- */}
+      <footer className="bg-black border-t-4 border-red-600 py-24 px-6 text-center">
+        <FadeIn>
+            <h2 className="text-6xl md:text-9xl font-black mb-12 leading-tight italic uppercase tracking-tighter">ALREADY IN DEBT.<br/><span className="text-red-600 underline decoration-white">MIGHT AS WELL BE FREE.</span></h2>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                <Button variant="primary" href={BUY_LINK}>BUY ON BAGS</Button>
+                <Button variant="secondary" href={X_LINK}>FOLLOW ON X</Button>
+            </div>
+            <div className="max-w-4xl mx-auto bg-red-600/10 border-2 border-red-600 p-8 text-sm font-bold tracking-widest text-gray-400">
+                $DEBT IS A MEME COIN CREATED FOR CULTURAL REBELLION. THERE IS NO FINANCIAL ROADMAP, ONLY SHARED PAIN AND SHARED HUMOR. INVEST ONLY WHAT YOU CAN AFFORD TO LOSE WHILE YOU EAT YOUR RAMEN.
+            </div>
+        </FadeIn>
       </footer>
     </div>
   );
