@@ -12,9 +12,9 @@ import { motion } from 'framer-motion';
 // ==========================================
 // 🚨 CONFIGURATION - Update these with your real links
 // ==========================================
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "YOUR_SUPABASE_URL"; 
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "YOUR_SUPABASE_KEY";
-const X_LINK = "https://x.com/your_username"; 
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://ekzxephakvminafxzdcq.supabase.co"; 
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "sb_publishable_r8W6GNtrqFi6wl5Z8rfvAQ_4MNZ8icc";
+const X_LINK = "https://x.com/i/communities/2012249877766439018"; 
 const BUY_LINK = "https://bags.fm/token/your_contract_address"; 
 const CONTRACT_ADDRESS = "88888888888888888888888888888888"; 
 // ==========================================
