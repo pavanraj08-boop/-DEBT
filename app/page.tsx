@@ -303,13 +303,13 @@ export default function DebtLandingPage() {
             <div className="flex-[2] w-full">
               <input type="text" placeholder="CAPTION..." value={memeCaption} onChange={(e) => setMemeCaption(e.target.value)} className="w-full bg-white p-4 text-black focus:border-red-600 focus:outline-none uppercase font-bold text-xl" />
             </div>
-            <button onClick={handleMemeUpload} disabled={uploadingMeme} className="w-full md:w-auto bg-red-600 text-white px-8 py-4 font-bold uppercase hover:bg-white hover:text-black transition-colors min-w-[140px] text-lg">
+            <button onClick={handleMemeUpload} disabled={uploadingMeme} className="w-full md:w-auto bg-red-600 text-white px-8 py-4 font-bold uppercase hover:bg-white hover:text-black transition-colors disabled:opacity-50 min-w-[140px] text-lg">
               {uploadingMeme ? <Loader2 className="animate-spin mx-auto" /> : "Upload"}
             </button>
           </div>
         </div>
 
-        {/* STORY INPUT FIXED */}
+        {/* STORY INPUT SECTION - FIXED VISIBILITY */}
         <div className="max-w-3xl mx-auto border-t border-gray-900 pt-12">
           <h3 className="text-2xl font-bold mb-8 text-white uppercase tracking-widest">
              <span className="text-red-600">CONFESSIONS</span> & STORIES
