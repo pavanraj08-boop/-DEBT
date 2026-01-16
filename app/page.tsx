@@ -128,8 +128,8 @@ export default function DebtLandingPage() {
             <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none tracking-tighter uppercase">
               OUT OF DEBT.<br/><span className="text-red-600">TOGETHER.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed uppercase">
-              Student debt is the chain around our generation.
+            <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+              $DEBT is a generation-defining meme coin born from the financial chains of student loans.
             </p>
             
             <p className="text-3xl font-bold italic mb-8 uppercase">Already broke. Might as well be free.</p>
@@ -157,47 +157,47 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- REALITY SECTION (VERIFIED 2026 LINKS) --- */}
+      {/* --- REALITY SECTION (NEW VERIFIED ARTICLES) --- */}
       <Section className="bg-[#111] text-[#F5F5F0] relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row gap-12 items-start relative z-10 text-left">
-          <div className="lg:w-1/3 lg:sticky lg:top-24">
+        <div className="flex flex-col lg:flex-row gap-12 items-start relative z-10">
+          <div className="lg:w-1/3 lg:sticky lg:top-24 text-left">
             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight text-white uppercase">
               THE SYSTEM <br/> IS RIGGED. <br/> <span className="text-red-600">HERE IS THE PROOF.</span>
             </h2>
-            <p className="text-gray-400 mb-8 text-lg">Click a report to verify the data behind the rebellion.</p>
+            <p className="text-gray-400 mb-8 text-lg">Official reports documenting the trillion-dollar chain.</p>
           </div>
           
           <div className="lg:w-2/3 grid gap-6">
             {[
               { 
-                title: "$1.81 Trillion Total Crisis", 
-                source: "Education Data Initiative", 
-                text: "Total student loan debt is now the second-highest consumer debt category in the US as of 2026.", 
-                url: "https://educationdata.org/student-loan-debt-statistics" 
+                title: "$1.75 Trillion Outstanding Crisis", 
+                source: "Federal Reserve", 
+                text: "Student loan debt has outpaced credit card debt, becoming a primary drag on household wealth.", 
+                url: "https://www.federalreserve.gov/releases/g19/current/" 
               },
               { 
                 title: "The Wage-to-Tuition Gap", 
                 source: "NCES Report", 
-                text: "Since 1980, college costs have grown 169% faster than the wages of young workers.", 
+                text: "Since 1980, the cost of college has grown 169% faster than the wages of young workers.", 
                 url: "https://nces.ed.gov/fastfacts/display.asp?id=76" 
               },
               { 
-                title: "The 10-Year Housing Delay", 
-                source: "Realtor.com", 
-                text: "A 2026 analysis confirms student debt delays homeownership by a decade for 1 in 4 graduates.", 
-                url: "https://www.realtor.com/advice/finance/student-loans-homeownership-delay-2026-repayment-changes/" 
+                title: "Lifetime Wealth Destruction", 
+                source: "Economic Policy Institute", 
+                text: "Student debt delays major life milestones like homeownership by an average of 7-10 years.", 
+                url: "https://www.epi.org/publication/student-debt-and-the-economy/" 
               },
               { 
-                title: "Wealth Loss: The 7x Gap", 
-                source: "FRB Boston", 
-                text: "Graduates without debt accumulate seven times more wealth by age 40 than those with loans.", 
-                url: "https://www.bostonfed.org/publications/current-policy-perspectives/2014/student-loan-debt-and-economic-outcomes.aspx" 
+                title: "Interest: The Invisible Anchor", 
+                source: "CFPB Analysis", 
+                text: "Predatory interest compounding means many borrowers pay double their original loan amount.", 
+                url: "https://www.consumerfinance.gov/data-research/student-loan-data/" 
               }
             ].map((stat, i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <a href={stat.url} target="_blank" className="block bg-[#1a1a1a] p-8 border-l-4 border-red-600 hover:bg-[#252525] transition-all group">
+                <a href={stat.url} target="_blank" className="block bg-[#1a1a1a] p-8 border-l-4 border-red-600 hover:bg-[#252525] transition-all text-left group">
                   <span className="text-xs font-bold text-red-500 uppercase flex items-center gap-2 mb-2"><FileText size={12} /> {stat.source}</span>
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors uppercase">{stat.title}</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">{stat.title}</h3>
                   <p className="text-gray-400 text-sm mb-4">{stat.text}</p>
                 </a>
               </FadeIn>
@@ -206,38 +206,39 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- COMMUNITY WALL (TYPING FIXED) --- */}
+      {/* --- COMMUNITY WALL & STORY INPUT FIXED --- */}
       <Section className="bg-black text-center border-t border-gray-900">
         <h2 className="text-5xl md:text-6xl font-black mb-8 uppercase">Community <span className="text-red-600">Wall</span></h2>
-        <p className="text-xl text-gray-400 mb-16 max-w-2xl mx-auto">Post your debt confessions and ramen survival stories.</p>
         
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto py-12">
           <h3 className="text-2xl font-bold mb-8 text-white uppercase tracking-widest">
              <span className="text-red-600">CONFESSIONS</span> & STORIES
           </h3>
 
-          {/* INPUT FORM - WHITE BACKGROUND FOR VISIBILITY */}
+          {/* HIGH CONTRAST INPUT BOX FOR TYPING VISIBILITY */}
           <form onSubmit={handleStorySubmit} className="mb-12 flex shadow-2xl border-2 border-red-600 overflow-hidden">
               <input 
                   type="text" 
                   value={storyInput}
                   onChange={(e) => setStoryInput(e.target.value)}
                   placeholder="TYPE YOUR STORY HERE..."
-                  className="flex-1 p-6 bg-white text-black text-xl focus:outline-none font-bold placeholder:text-gray-500"
+                  className="flex-1 p-6 bg-white text-black text-xl focus:outline-none font-bold placeholder:text-gray-400"
               />
               <button type="submit" disabled={postingStory} className="bg-red-700 hover:bg-red-600 text-white font-black px-10 uppercase transition-colors min-w-[140px] text-lg">
                   {postingStory ? <Loader2 className="animate-spin mx-auto" /> : "POST"}
               </button>
           </form>
 
+          {/* PRE-LOADED STORIES */}
           <div className="space-y-4">
             {[
               { text: "Finally paid off my first loan. Felt like breaking actual chains.", date: "2 days ago" },
-              { text: "Graduated with $87K in debt. Found this community. Don't feel alone anymore.", date: "1 week ago" }
+              { text: "Graduated with $87K in debt. Found this community. Don't feel alone anymore.", date: "1 week ago" },
+              { text: "Ate ramen for 3 months straight. Made my first payment. We're doing this.", date: "3 days ago" }
             ].map((s, i) => (
               <div key={i} className="bg-[#0a0a0a] border border-gray-800 p-8 text-left hover:border-red-600 transition-colors">
                 <p className="text-xl text-gray-200 mb-4 font-medium italic">"{s.text}"</p>
-                <p className="text-xs text-red-600 font-bold uppercase tracking-widest">{s.date}</p>
+                <p className="text-xs text-red-600 font-bold uppercase">{s.date}</p>
               </div>
             ))}
             {stories.map((s: any) => (
@@ -250,7 +251,7 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- FINAL FOOTER CTA --- */}
+      {/* --- FINAL CTA --- */}
       <Section className="bg-black text-center py-32 border-t border-gray-900">
         <FadeIn>
             <h2 className="text-6xl md:text-8xl font-black mb-8 leading-tight uppercase">Already in debt.<br/><span className="text-red-600">Might as well be free.</span></h2>
