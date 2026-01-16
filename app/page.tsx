@@ -128,8 +128,8 @@ export default function DebtLandingPage() {
             <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none tracking-tighter uppercase">
               OUT OF DEBT.<br/><span className="text-red-600">TOGETHER.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Student debt is the chain around our generation. We are breaking it, one meme at a time.
+            <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed uppercase">
+              Student debt is the chain around our generation.
             </p>
             
             <p className="text-3xl font-bold italic mb-8 uppercase">Already broke. Might as well be free.</p>
@@ -157,14 +157,14 @@ export default function DebtLandingPage() {
         </div>
       </Section>
 
-      {/* --- REALITY SECTION (VERIFIED SOURCES) --- */}
+      {/* --- THE SYSTEM IS RIGGED (VERIFIED 2026 LINKS) --- */}
       <Section className="bg-[#111] text-[#F5F5F0] relative overflow-hidden">
         <div className="flex flex-col lg:flex-row gap-12 items-start relative z-10 text-left">
           <div className="lg:w-1/3 lg:sticky lg:top-24">
             <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight text-white uppercase">
               THE SYSTEM <br/> IS RIGGED. <br/> <span className="text-red-600">HERE IS THE PROOF.</span>
             </h2>
-            <p className="text-gray-400 mb-8 text-lg">Click a report to verify the data behind the rebellion.</p>
+            <p className="text-gray-400 mb-8 text-lg italic">Verified 2026 Data Reports:</p>
           </div>
           
           <div className="lg:w-2/3 grid gap-6">
@@ -172,25 +172,25 @@ export default function DebtLandingPage() {
               { 
                 title: "$1.81 Trillion Total Crisis", 
                 source: "Education Data Initiative", 
-                text: "Student debt is officially the second-highest consumer debt category in the US as of 2026.", 
+                text: "Total student debt reached $1.81 Trillion in 2026. It is now the second-highest consumer debt category after mortgages.", 
                 url: "https://educationdata.org/student-loan-debt-statistics" 
               },
               { 
                 title: "The Wage-to-Tuition Gap", 
-                source: "NCES Report", 
-                text: "College costs have grown 169% faster than the wages of young workers since 1980.", 
+                source: "NCES (Government Data)", 
+                text: "Since 1980, college costs have increased by 169%, while actual earnings of young workers have remained stagnant.", 
                 url: "https://nces.ed.gov/fastfacts/display.asp?id=76" 
               },
               { 
                 title: "The 10-Year Housing Delay", 
-                source: "Realtor.com", 
-                text: "Recent data confirms student debt delays homeownership by a full decade for 1 in 4 graduates.", 
+                source: "Realtor.com Analysis", 
+                text: "A fresh 2026 analysis shows student debt delays homeownership by an average of 10 years for 27% of graduates.", 
                 url: "https://www.realtor.com/advice/finance/student-loans-homeownership-delay-2026-repayment-changes/" 
               },
               { 
                 title: "Wealth Loss: The 7x Gap", 
                 source: "FRB Boston", 
-                text: "Graduates without student debt accumulate 7x more wealth by age 40 than those carrying loans.", 
+                text: "By age 40, households without student debt accumulate up to seven times more wealth than those who carried loans.", 
                 url: "https://www.bostonfed.org/publications/current-policy-perspectives/2014/student-loan-debt-and-economic-outcomes.aspx" 
               }
             ].map((stat, i) => (
@@ -198,7 +198,10 @@ export default function DebtLandingPage() {
                 <a href={stat.url} target="_blank" className="block bg-[#1a1a1a] p-8 border-l-4 border-red-600 hover:bg-[#252525] transition-all group">
                   <span className="text-xs font-bold text-red-500 uppercase flex items-center gap-2 mb-2"><FileText size={12} /> {stat.source}</span>
                   <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors uppercase">{stat.title}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{stat.text}</p>
+                  <p className="text-gray-400 text-sm mb-4 leading-relaxed">{stat.text}</p>
+                  <div className="flex items-center gap-2 text-xs text-gray-600 font-bold uppercase tracking-widest group-hover:text-white transition-colors">
+                    View Official Report <ArrowRight size={12} />
+                  </div>
                 </a>
               </FadeIn>
             ))}
@@ -215,7 +218,7 @@ export default function DebtLandingPage() {
              <span className="text-red-600">CONFESSIONS</span> & STORIES
           </h3>
 
-          {/* INPUT FORM - BRIGHT WHITE BACKGROUND SO YOU CAN SEE YOUR TEXT */}
+          {/* INPUT FORM - HIGH VISIBILITY WHITE BOX */}
           <form onSubmit={handleStorySubmit} className="mb-12 flex shadow-2xl border-2 border-red-600 overflow-hidden">
               <input 
                   type="text" 
